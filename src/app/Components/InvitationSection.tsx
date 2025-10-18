@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseClient } from "@/app/lib/supabaseClient";
 import { FaInstagram } from "react-icons/fa";
 import "yet-another-react-lightbox/styles.css";
 import Lightbox from "yet-another-react-lightbox";
@@ -9,27 +9,9 @@ import { FaMusic } from "react-icons/fa";
 
 
 // 🚀 Supabase Client
-const getSupabase = () => {
-  if (typeof window === "undefined") return null; // ⛔ jangan jalan di build
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-};
-
-const supabase = getSupabase();
-
+const supabase = getSupabaseClient();
 
 export default function InvitationDetailSection({ autoPlayMusic = false }: { autoPlayMusic?: boolean }) {
-  type Wish = {
-  id : string;
-  name: string;
-  message: string;
-  attendance: string;
-  created_at: string;
-};
-
-
     // 🎶 Musik State
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -70,77 +52,90 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
   message: "",
   attendance: "",
 });
-  const [wishes, setWishes] = useState<Wish[]>([]);
+  const [wishes, setWishes] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const verseRef = useRef<HTMLDivElement>(null);
   const brideRef = useRef<HTMLDivElement>(null);
   const groomRef = useRef<HTMLDivElement>(null);
 
-  // 🔁 Slideshow otomatis
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
    // 🧠 Ambil ucapan awal dari Supabase
-  const fetchWishes = async () => {
-    if (!supabase) return;
-const { data, error } = await supabase
-  .from("wishes")
-  .select("*")
-  .order("created_at", { ascending: false });
+const fetchWishes = async () => {
+  if (!supabase) return; // <--- tambahkan ini
+  const { data, error } = await supabase
+    .from("wishes")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (!error && data) setWishes(data);
+};
 
-    if (!error && data) setWishes(data as Wish[]);
+
+// 🧠 Ambil data awal & pantau realtime
+useEffect(() => {
+  if (!supabase) return;
+
+  const loadInitial = async () => {
+    const { data, error } = await supabase
+      .from("wishes")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (!error && data) setWishes(data);
   };
 
-  // 🔁 Realtime listener
-  useEffect(() => {
-     if (!supabase) return; // <--- tambahkan ini
-    fetchWishes();
-    const channel = supabase
-      .channel("realtime:wishes")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "wishes" },
-        (payload) => setWishes((prev) => [payload.new as Wish, ...prev])
-      )
-      .subscribe();
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
+  loadInitial();
+
+  // ✅ Gunakan nama channel custom, bukan "public:wishes"
+  const channel = supabase
+    .channel("wishes-realtime-channel")
+    .on(
+      "postgres_changes",
+      { event: "INSERT", schema: "public", table: "wishes" },
+      (payload) => {
+        console.log("✅ Realtime payload diterima:", payload.new);
+        setWishes((prev) => [payload.new, ...prev]);
+      }
+    )
+    .subscribe((status) => {
+      console.log("📡 Channel status:", status);
+    });
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, []);
+
+
+
 
   // ✍️ Kirim ucapan
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-   if (!supabase) return; // <--- tambahkan ini
+  if (!supabase) return;
   setLoading(true);
 
   const { name, message, attendance } = formData;
   if (!name || !message || !attendance) {
-    alert("Lengkapi semua kolom terlebih dahulu!");
+    alert("Lengkapi semua kolom!");
     setLoading(false);
     return;
   }
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("wishes")
-    .insert([{ name, message, attendance }])
-    .select(); // ✅ biar dapet data balik dari insert
+    .insert([{ name, message, attendance }]);
 
   if (error) {
-    console.error(error);
     alert("Gagal mengirim ucapan 😢");
-  } else if (data && data.length > 0) {
-    // ✅ Tambahkan langsung ke daftar tanpa perlu refresh
-    setWishes((prev) => [data[0], ...prev]);
+    console.error(error);
+  } else {
+    // biarkan realtime listener yang update daftar
     setFormData({ name: "", message: "", attendance: "" });
   }
 
   setLoading(false);
 };
+
+
 
 
 
