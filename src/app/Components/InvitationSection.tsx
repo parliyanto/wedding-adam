@@ -100,7 +100,7 @@ useEffect(() => {
       { event: "INSERT", schema: "public", table: "wishes" },
       (payload) => {
         console.log("✅ Realtime payload diterima:", payload.new);
-        setWishes((prev) => [payload.new, ...prev]);
+        setWishes((prev) => [payload.new as Wish, ...prev]);
       }
     )
     .subscribe((status) => {
