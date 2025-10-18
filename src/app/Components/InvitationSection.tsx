@@ -52,7 +52,15 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
   message: "",
   attendance: "",
 });
-  const [wishes, setWishes] = useState<any[]>([]);
+  interface Wish {
+  id: string;
+  name: string;
+  message: string;
+  attendance: string;
+  created_at?: string;
+}
+
+const [wishes, setWishes] = useState<Wish[]>([]);
   const [loading, setLoading] = useState(false);
   const verseRef = useRef<HTMLDivElement>(null);
   const brideRef = useRef<HTMLDivElement>(null);
