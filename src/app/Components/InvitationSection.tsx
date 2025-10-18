@@ -15,6 +15,15 @@ const supabase = createClient(
 );
 
 export default function InvitationDetailSection({ autoPlayMusic = false }: { autoPlayMusic?: boolean }) {
+  type Wish = {
+  id: string;
+  name: string;
+  message: string;
+  attendance: string;
+  created_at: string;
+};
+
+
     // 🎶 Musik State
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -55,7 +64,7 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
   message: "",
   attendance: "",
 });
-const [wishes, setWishes] = useState<any[]>([]);
+  const [wishes, setWishes] = useState<Wish[]>([]);
   const [loading, setLoading] = useState(false);
   const verseRef = useRef<HTMLDivElement>(null);
   const brideRef = useRef<HTMLDivElement>(null);
@@ -75,7 +84,7 @@ const [wishes, setWishes] = useState<any[]>([]);
       .from("wishes")
       .select("*")
       .order("created_at", { ascending: false });
-    if (!error && data) setWishes(data);
+    if (!error && data) setWishes(data as Wish[]);
   };
 
   // 🔁 Realtime listener
@@ -86,7 +95,7 @@ const [wishes, setWishes] = useState<any[]>([]);
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "wishes" },
-        (payload) => setWishes((prev) => [payload.new, ...prev])
+        (payload) => setWishes((prev) => [payload.new as Wish, ...prev])
       )
       .subscribe();
     return () => {
