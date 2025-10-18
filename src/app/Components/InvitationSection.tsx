@@ -12,11 +12,13 @@ import { FaMusic } from "react-icons/fa";
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+  
 );
 
 export default function InvitationDetailSection({ autoPlayMusic = false }: { autoPlayMusic?: boolean }) {
   type Wish = {
-  id: string;
+  id : string;
   name: string;
   message: string;
   attendance: string;
