@@ -9,12 +9,16 @@ import { FaMusic } from "react-icons/fa";
 
 
 // 🚀 Supabase Client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const getSupabase = () => {
+  if (typeof window === "undefined") return null; // ⛔ jangan jalan di build
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+};
 
-  
-);
+const supabase = getSupabase();
+
 
 export default function InvitationDetailSection({ autoPlayMusic = false }: { autoPlayMusic?: boolean }) {
   type Wish = {
@@ -82,15 +86,18 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
 
    // 🧠 Ambil ucapan awal dari Supabase
   const fetchWishes = async () => {
-    const { data, error } = await supabase
-      .from("wishes")
-      .select("*")
-      .order("created_at", { ascending: false });
+    if (!supabase) return;
+const { data, error } = await supabase
+  .from("wishes")
+  .select("*")
+  .order("created_at", { ascending: false });
+
     if (!error && data) setWishes(data as Wish[]);
   };
 
   // 🔁 Realtime listener
   useEffect(() => {
+     if (!supabase) return; // <--- tambahkan ini
     fetchWishes();
     const channel = supabase
       .channel("realtime:wishes")
@@ -108,6 +115,7 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
   // ✍️ Kirim ucapan
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+   if (!supabase) return; // <--- tambahkan ini
   setLoading(true);
 
   const { name, message, attendance } = formData;
