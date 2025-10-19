@@ -43,8 +43,17 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
     setIsPlaying(!isPlaying);
   };
 
+  
+
   const images = ["/section1.webp", "/section2.webp"];
   const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  }, 4000); // ganti setiap 4 detik
+  return () => clearInterval(interval);
+}, [images.length]);
+
   const [showGift, setShowGift] = useState(false);
   const [copiedText, setCopiedText] = useState("");
   const [formData, setFormData] = useState({
