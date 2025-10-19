@@ -45,7 +45,7 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
 
   
 
-  const images = ["/section1.webp", "/section2.webp"];
+  const images = ["/thanks1.JPG", "/thanks2.JPG", "/thanks3.JPG", "/thanks4.JPG" ];
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
   const interval = setInterval(() => {
@@ -176,13 +176,15 @@ const handleSubmit = async (e: React.FormEvent) => {
   const [open, setOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const galleryImages = [
-    "/gallery1.webp",
-    "/gallery2.webp",
-    "/gallery3.webp",
-    "/gallery4.webp",
+    "/gallery1.JPG",
+    "/gallery1.JPG",
+    "/gallery3.JPG",
+    "/gallery4.JPG",
+    "/gallery6.JPG",
+    "/gallery7.JPG",
   ];
 
-  const thankImages = ["/gallery1.webp", "/gallery2.webp", "/gallery3.webp", "/gallery4.webp"];
+  const thankImages = ["/thanks1.JPG", "/thanks2.JPG", "/thanks3.JPG", "/thanks4.JPG"];
   const [currentThankIndex, setCurrentThankIndex] = useState(0);
 
   useEffect(() => {
@@ -337,7 +339,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           >
             <div className="absolute -left-2 top-2 w-64 h-[380px] bg-[#b9a999] rounded-md"></div>
             <motion.img
-              src="/bride.webp"
+              src="/bride.JPG"
               alt="The Bride"
               className="relative w-64 h-[380px] object-cover rounded-md shadow-lg"
               initial={{ opacity: 0, x: 80 }}
@@ -392,7 +394,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           >
             <div className="absolute left-2 top-2 w-64 h-[380px] bg-[#b9a999] rounded-md"></div>
             <motion.img
-              src="/groom.webp"
+              src="/groom.JPG"
               alt="The Groom"
               className="relative w-64 h-[380px] object-cover rounded-md shadow-lg"
               initial={{ opacity: 0, x: -80 }}
@@ -422,10 +424,11 @@ const handleSubmit = async (e: React.FormEvent) => {
         <motion.div
           className="relative w-full min-h-[140vh] flex flex-col items-center justify-start text-center overflow-hidden"
           style={{
-            backgroundImage: "url('/cover.webp')",
+            backgroundImage: "url('/thanks4.JPG')",
             backgroundAttachment: "fixed",
             backgroundPosition: "center",
-            backgroundSize: "cover",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
           }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -599,7 +602,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 transition={{ duration: 1 }}
               >
                 <img
-                  src="/weddingevent.webp"
+                  src="/akad.JPG"
                   alt="Akad Nikah"
                   className="w-full h-[300px] object-cover"
                   style={{
@@ -687,7 +690,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 transition={{ duration: 1, delay: 0.2 }}
               >
                 <img
-                  src="/akad.jpg"
+                  src="/resepsi.JPG"
                   alt="Resepsi"
                   className="w-full h-[360px] object-cover object-center"
                   style={{
@@ -771,7 +774,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         >
           {/* 🔹 Parallax background pakai <motion.img> */}
           <motion.img
-            src="/about.webp"
+            src="/thanks3.JPG"
             alt="Our Journey"
             className="absolute top-0 left-0 w-full h-full object-cover md:object-[center_10%] scale-105"
             style={{ objectPosition: "center top" }}
@@ -960,7 +963,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         >
           {/* 🖼️ Background Image */}
           <motion.img
-            src="/about.webp"
+            src="/thanks3.JPG"
             alt="Wedding Gift Background"
             className="absolute top-0 left-0 w-full h-full object-cover md:object-center object-[center_30%] scale-105"
             initial={{ scale: 1.05, opacity: 0 }}
@@ -1145,7 +1148,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               transition={{ duration: 1.2, ease: "easeOut" }}
             >
               <img
-                src="/cover.webp"
+                src="/wishlist.JPG"
                 alt="Couple Photo"
                 className="w-full h-full object-cover object-center"
               />

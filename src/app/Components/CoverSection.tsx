@@ -28,7 +28,7 @@ export default function WeddingCover() {
               <div
                 className="absolute inset-0"
                 style={{
-                  backgroundImage: "url('/cover.webp')",
+                  backgroundImage: "url('/cover.JPG')",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
