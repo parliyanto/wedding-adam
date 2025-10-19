@@ -394,7 +394,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           >
             <div className="absolute left-2 top-2 w-64 h-[380px] bg-[#b9a999] rounded-md"></div>
             <motion.img
-              src="/groom.JPG"
+              src="/groom.jpg"
               alt="The Groom"
               className="relative w-64 h-[380px] object-cover rounded-md shadow-lg"
               initial={{ opacity: 0, x: -80 }}
@@ -602,7 +602,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 transition={{ duration: 1 }}
               >
                 <img
-                  src="/akad.JPG"
+                  src="/akad.jpg"
                   alt="Akad Nikah"
                   className="w-full h-[300px] object-cover"
                   style={{
