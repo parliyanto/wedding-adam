@@ -316,13 +316,14 @@ const handleSubmit = async (e: React.FormEvent) => {
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <motion.div
-            className="absolute left-[9rem] top-1/2 -translate-y-1/2 rotate-[-90deg] origin-left"
+            className="absolute top-1/2 -translate-y-1/2 rotate-[-90deg] origin-left 
+               left-[6rem] sm:left-[1rem] md:left-[9rem]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <h2 className="text-gray-600 italic text-4xl tracking-wide font-serif">
+            <h2 className="text-gray-600 italic text-2xl sm:text-3xl md:text-4xl tracking-wide font-serif">
               The Bride
             </h2>
           </motion.div>
@@ -371,13 +372,13 @@ const handleSubmit = async (e: React.FormEvent) => {
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <motion.div
-            className="absolute right-[9rem] top-1/2 -translate-y-1/2 rotate-[90deg] origin-right"
+            className="absolute right-[6rem] sm:right-[1rem] md:right-[9rem] top-1/2 -translate-y-1/2 rotate-[90deg] origin-right"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <h2 className="text-gray-600 italic text-4xl tracking-wide font-serif">
+            <h2 className="text-gray-600 italic text-2xl sm:text-3xl md:text-4xl tracking-wide font-serif">
               The Groom
             </h2>
           </motion.div>
