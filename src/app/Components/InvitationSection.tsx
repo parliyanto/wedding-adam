@@ -177,11 +177,15 @@ const handleSubmit = async (e: React.FormEvent) => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const galleryImages = [
     "/gallery1.JPG",
-    "/gallery1.JPG",
+    "/gallery2.JPG",
     "/gallery3.JPG",
     "/gallery4.JPG",
-    "/gallery6.JPG",
+    "/gallery5.JPG",
+    "/gallery11.JPG",
     "/gallery7.JPG",
+    "/gallery8.JPG",
+    "/gallery9.JPG",
+    "/gallery10.JPG",
   ];
 
   const thankImages = ["/thanks1.JPG", "/thanks2.JPG", "/thanks3.JPG", "/thanks4.JPG"];
@@ -339,7 +343,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           >
             <div className="absolute -left-2 top-2 w-64 h-[380px] bg-[#b9a999] rounded-md"></div>
             <motion.img
-              src="/bride.JPG"
+              src="/bride.jpeg"
               alt="The Bride"
               className="relative w-64 h-[380px] object-cover rounded-md shadow-lg"
               initial={{ opacity: 0, x: 80 }}
@@ -394,7 +398,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           >
             <div className="absolute left-2 top-2 w-64 h-[380px] bg-[#b9a999] rounded-md"></div>
             <motion.img
-              src="/groom.jpg"
+              src="/groom.jpeg"
               alt="The Groom"
               className="relative w-64 h-[380px] object-cover rounded-md shadow-lg"
               initial={{ opacity: 0, x: -80 }}
@@ -692,7 +696,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <img
                   src="/resepsi.JPG"
                   alt="Resepsi"
-                  className="w-full h-[360px] object-cover object-center"
+                  className="w-full h-[400px] object-cover object-center"
                   style={{
                     borderTopLeftRadius: "120px",
                     borderTopRightRadius: "0px",
@@ -871,86 +875,77 @@ const handleSubmit = async (e: React.FormEvent) => {
           </motion.div>
         </motion.div>
 
+{/* 📸 Our Gallery Section */}
+<motion.div
+  className="w-full bg-[#efe7dd] py-20 flex flex-col items-center text-center"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1 }}
+>
+  {/* Judul */}
+  <motion.h2
+    className="text-2xl font-serif italic text-[#3a2e2e] mb-10"
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+  >
+    Our Gallery
+  </motion.h2>
 
+  {/* Grid Foto */}
+  <div className="grid grid-cols-2 gap-3 px-4 w-full max-w-3xl">
+    {galleryImages.map((src, i) => {
+      const isFirst = i === 0;
+      const isLast = i === galleryImages.length - 1;
+      const isFull = isFirst || isLast;
 
-        {/* 📸 Our Gallery Section */}
+      return (
         <motion.div
-          className="w-full bg-[#efe7dd] py-20 flex flex-col items-center text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1 }}
+          key={i}
+          onClick={() => {
+            setPhotoIndex(i);
+            setOpen(true);
+          }}
+          // 🔹 Kalau foto pertama / terakhir → full width (col-span-2)
+          className={`cursor-pointer overflow-hidden rounded-xl shadow-md transition-transform hover:scale-[1.03] ${
+            isFull ? "col-span-2" : "col-span-1"
+          }`}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: i * 0.1 }}
         >
-          {/* Judul */}
-          <motion.h2
-            className="text-2xl font-serif italic text-[#3a2e2e] mb-10"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            Our Gallery
-          </motion.h2>
-
-          {/* Grid Foto */}
-          <motion.div
-            className="grid grid-cols-2 gap-5 px-6 w-full max-w-2xl"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.2 }, // efek delay tiap gambar
-              },
-            }}
-          >
-            {galleryImages.map((src, i) => (
-              <motion.div
-                key={i}
-                onClick={() => {
-                  setPhotoIndex(i);
-                  setOpen(true);
-                }}
-                className={`cursor-pointer transition-transform hover:scale-[1.03] ${
-                  i === 0 || i === galleryImages.length - 1
-                    ? "col-span-2"
-                    : "col-span-1"
-                }`}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.95, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    scale: 1,
-                    y: 0,
-                    transition: { duration: 0.8, ease: "easeOut" },
-                  },
-                }}
-              >
-                <img
-                  src={src}
-                  alt={`Gallery ${i + 1}`}
-                  className={`w-full ${
-                    i === 0 || i === galleryImages.length - 1
-                      ? "h-[300px] md:h-[360px]"
-                      : "h-[220px] md:h-[260px]"
-                  } object-cover rounded-xl shadow-md`}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* 💡 Lightbox */}
-          {open && (
-            <Lightbox
-              open={open}
-              close={() => setOpen(false)}
-              index={photoIndex}
-              slides={galleryImages.map((src) => ({ src }))}
-              animation={{ fade: 300, swipe: 300 }}
-            />
-          )}
+          <img
+            src={src}
+            alt={`Gallery ${i + 1}`}
+            className={`w-full h-auto object-contain rounded-xl ${
+              isFull ? "max-h-[400px]" : "max-h-[300px]"
+            }`}
+            loading="lazy"
+          />
         </motion.div>
+      );
+    })}
+  </div>
+
+  {/* 💡 Lightbox */}
+  {open && (
+    <Lightbox
+      key="gallery-lightbox"
+      open={open}
+      close={() => setOpen(false)}
+      index={photoIndex}
+      slides={galleryImages.map((src) => ({ src }))}
+      animation={{ fade: 400, swipe: 300 }}
+      controller={{ closeOnBackdropClick: true }}
+      on={{ view: ({ index }) => setPhotoIndex(index) }}
+    />
+  )}
+</motion.div>
+
+
+
+
+
 
 
         {/* 🎁 Wedding Gift Section */}
