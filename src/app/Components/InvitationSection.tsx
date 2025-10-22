@@ -45,7 +45,7 @@ export default function InvitationDetailSection({ autoPlayMusic = false }: { aut
 
   
 
-  const images = ["/thanks1.JPG", "/thanks2.JPG", "/thanks3.JPG", "/thanks4.JPG" ];
+  const images = ["/section1.webp", "/section1_2.webp", "/section1_3.webp" ];
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
   const interval = setInterval(() => {
