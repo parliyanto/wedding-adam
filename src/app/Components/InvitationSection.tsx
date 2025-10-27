@@ -60,12 +60,29 @@
 
     const images = ["/section1.webp", "/section1_2.webp", "/section1_3.webp" ];
     const [currentIndex, setCurrentIndex] = useState(0);
+    const parallaxRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 4000); // ganti setiap 4 detik
     return () => clearInterval(interval);
   }, [images.length]);
+
+    // Efek Parallax saat scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const background = parallaxRef.current;
+
+      if (background) {
+        background.style.transform = `translateY(${scrollPosition * 0.5}px)`; // Sesuaikan faktor parallax
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
     const [showGift, setShowGift] = useState(false);
     const [copiedText, setCopiedText] = useState("");
@@ -241,6 +258,8 @@
       }, []);
 
 
+
+      
       return (
         <div className="flex justify-center gap-4 mb-6 text-center">
           <div>
@@ -815,17 +834,18 @@
 
             {/* 🔹 Parallax background pakai <motion.div> dan bukan <motion.img> */}
           <motion.div
-            className="absolute top-0 left-0 w-full h-full"
-            style={{
-              backgroundImage: `url(${images[currentIndex]})`,
-              backgroundSize: "contain",
-              backgroundPosition: "center top",
-              backgroundAttachment: "fixed",  // Parallax effect
-            }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-          />
+        ref={parallaxRef}
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          backgroundImage: `url(${images[currentIndex]})`,
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed", // Parallax effect
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 2, ease: "easeOut" }}
+      />
 
             {/* 🔹 Overlay hitam transparan */}
             <motion.div
