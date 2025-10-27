@@ -240,6 +240,7 @@
         return () => clearInterval(timer);
       }, []);
 
+
       return (
         <div className="flex justify-center gap-4 mb-6 text-center">
           <div>
@@ -805,7 +806,7 @@
 
           {/* 🌸 Our Journey Section */}
           <motion.div
-            className="relative w-full h-[700px] overflow-hidden flex items-center justify-center text-white"
+            className="relative w-full h-full overflow-hidden flex items-center justify-center text-white"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -878,20 +879,26 @@
               >
                 {[
                   {
-                    title: "Awal Bertemu",
-                    text: `Berawal dari November 2010, aku kelas 2 SMP dan Lifa kelas 1 SMP.
-          Aku lewat di area kelas satu tiba-tiba ada yang nyegir dan minta nomor HP.
-          Beberapa hari kemudian aku dapat SMS dari Lifa tapi yang minta nomornya temannya Lifa.`,
+                    title: "Awal Bertemu (Hanya di Instagram)",
+                    text: `Semua bermula di Instagram. Setelah saling follow, Adam memberanikan diri mengirim pesan kepada Tassya. Dari sekadar chatting ringan, obrolan kami segera berkembang menjadi intens dan penuh tawa.`,
                   },
                   {
-                    title: "Jatuh Cinta",
-                    text: `Aku orang yang masih gak ngerti cinta-cintaan jadi responnya biasa.
-          Sampai beberapa bulan kemudian, kami mulai rutin telponan dan Lifa makin dekat di hati.`,
+                    title: "Pisang Cebanan dan First Date",
+                    text: `Kedekatan kami semakin terjalin ketika Adam memesan Pisang Cebanan yang Tassya jual. Momen chatting dan transaksi inilah yang memicu keinginan kami untuk bertemu lagi. First Date kami adalah berjalan-jalan seru di salah satu Mall di Jakarta dan dilanjutkan dengan bermain Bowling! Momen ini menjadi penanda strike pertama cinta kami.`,
                   },
                   {
-                    title: "Pacaran",
-                    text: `Sampai suatu hari Lifa tanya “Kita kelanjutannya gimana?”
-          Tepat 3 Januari 2011 kita jadian. Walau sering salah paham, cerita kami makin kuat.`,
+                    title: "Menjalin Kasih",
+                    text: `Dari first date yang seru, kami menyadari adanya kecocokan luar biasa. Kami pun mantap untuk menjalin kasih dan memulai babak baru sebagai sepasang kekasih. Hari, bulan, bahkan tahun pun kami lalui bersama, saling mendukung, bertumbuh, dan menguji keyakinan satu sama lain.`,
+                  },
+                  {
+                    title: "Memantapkan Hati (6 Juli 2025)",
+                    text: `Setelah melewati masa pacaran yang penuh makna, Adam memantapkan hati untuk membawa hubungan ini ke jenjang serius. Tepat pada tanggal 6 Juli 2025, momen lamaran yang mengharukan diselenggarakan, menjadi penanda bahwa hati kami telah bersepakat untuk saling melengkapi selamanya.`,
+                  },
+                  {
+                    title: "Janji Suci: Selamanya Milik Kita",
+                    text: `dengan penuh rasa syukur dan bahagia, kami siap mengukir babak baru. Kisah yang bermula dari DM Instagram, kelezatan Pisang Cebanan, dan keseruan date di Mall Jakarta, kini berlabuh di ikatan suci pernikahan.
+Mohon doa restu dari Bapak/Ibu/Saudara/i sekalian, agar pernikahan Adam & Tassya menjadi langkah awal menuju keluarga yang Sakinah, Mawaddah, Warahmah.
+Adam & Tassya`,
                   },
                 ].map((story, i) => (
                   <motion.div
@@ -906,7 +913,7 @@
                     }}
                   >
                     <h3 className={`${lora.className} text-base font-serif italic mb-1`}>{story.title}</h3>
-                    <p className={`${lora.className} text-gray-100 whitespace-pre-line`}>{story.text}</p>
+                    <p className={`${lora.className} text-gray-100 whitespace-pre-line mb-10`}>{story.text}</p>
                   </motion.div>
                 ))}
               </motion.div>
