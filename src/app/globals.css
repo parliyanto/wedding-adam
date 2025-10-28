@@ -27,21 +27,12 @@
 }
 
 
-.parallax-bg {
-  background-image: url('/path/to/image');
-  background-position: center;
+.parallax {
+  background-image: url('your-image.jpg');
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  height: 100vh; /* Ganti dengan tinggi yang sesuai */
+  height: 100vh; /* or any desired height */
   position: relative;
-}
-
-/* Efek Parallax untuk scroll */
-.parallax-bg.fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1; /* Agar tidak menutupi konten lainnya */
 }
 
