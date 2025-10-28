@@ -26,3 +26,22 @@
   animation-delay: 0.4s;
 }
 
+
+.parallax-bg {
+  background-image: url('/path/to/image');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh; /* Ganti dengan tinggi yang sesuai */
+  position: relative;
+}
+
+/* Efek Parallax untuk scroll */
+.parallax-bg.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1; /* Agar tidak menutupi konten lainnya */
+}
+

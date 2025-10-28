@@ -88,7 +88,7 @@
     }
   }, [windowWidth]);
 
-  
+
     useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -716,7 +716,7 @@
                     { text: "Akad Nikah", className: `${philosopher.className} text-xl font-serif italic font-bold mb-2` },
                     { text: "Sabtu, 06 Desember 2025", className: `${lora.className} text-sm mb-1` },
                     { divider: true },
-                    { text: "12.00 WIB s/d Selesai", className: `${lora.className} text-sm mb-3` },
+                    { text: "09.00 WIB s/d 11.00", className: `${lora.className} text-sm mb-3` },
                     { text: "Lokasi Acara", className: `${philosopher.className} text-xl font-bold mb-1` },
                     { text: "Jl Prumpung Tengah | Rt.10/Rw.06, Cipinang Besar Utara, Jatinegara, Jakarta Timur", className: `${lora.className} text-sm leading-relaxed mb-6` },
                   ].map((item, idx) =>
@@ -853,7 +853,7 @@
 
           {/* 🌸 Our Journey Section */}
           <motion.div
-            className="relative w-full h-full overflow-hidden flex items-center justify-center text-white"
+            className="relative w-full min-h-screen overflow-auto flex items-center justify-center text-white"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -929,6 +929,10 @@
                   {
                     title: "Awal Bertemu",
                     text: `Semua bermula di Instagram. Setelah saling follow, Adam memberanikan diri mengirim pesan kepada Tassya. Dari sekadar chatting ringan, obrolan kami segera berkembang menjadi intens dan penuh tawa.`,
+                  },
+                  {
+                    title: "Jatuh Cinta",
+                    text: `Kedekatan kami semakin terjalin ketika Adam memesan Pisang Cebanan yang Tassya jual. Momen chatting dan transaksi inilah yang memicu keinginan kami untuk bertemu lagi. Tak lama setelah itu kita berdua jalan di suatu mall di jakarta dan dilanjutkan dengan bermain Bowling! Momen ini menjadi penanda strike pertama cinta kami.`,
                   },
                   {
                     title: "Pacaran",
