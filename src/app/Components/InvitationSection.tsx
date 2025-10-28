@@ -61,6 +61,34 @@
     const images = ["/section1.webp", "/section1_2.webp", "/section1_3.webp" ];
     const [currentIndex, setCurrentIndex] = useState(0);
     const parallaxRef = useRef<HTMLDivElement>(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    
+    // Mengupdate ukuran window
+    useEffect(() => {
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+
+      return() => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    useEffect(() => {
+    if (windowWidth > 768) {
+      // Parallax effect untuk desktop
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        const background = parallaxRef.current;
+
+        if (background) {
+          background.style.transform = `translateY(${scrollPosition * 0.5}px)`; // Sesuaikan parallax
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [windowWidth]);
+
+  
     useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -886,7 +914,7 @@
                   visible: { opacity: 1, y: 0, transition: { duration: 0.9 } },
                 }}
               >
-                Our Journey
+                 - Our Journey -
               </motion.h2>
 
               {/* 📜 Cerita perjalanan */}
@@ -899,26 +927,20 @@
               >
                 {[
                   {
-                    title: "Awal Bertemu (Hanya di Instagram)",
+                    title: "Awal Bertemu",
                     text: `Semua bermula di Instagram. Setelah saling follow, Adam memberanikan diri mengirim pesan kepada Tassya. Dari sekadar chatting ringan, obrolan kami segera berkembang menjadi intens dan penuh tawa.`,
                   },
                   {
-                    title: "Pisang Cebanan dan First Date",
-                    text: `Kedekatan kami semakin terjalin ketika Adam memesan Pisang Cebanan yang Tassya jual. Momen chatting dan transaksi inilah yang memicu keinginan kami untuk bertemu lagi. First Date kami adalah berjalan-jalan seru di salah satu Mall di Jakarta dan dilanjutkan dengan bermain Bowling! Momen ini menjadi penanda strike pertama cinta kami.`,
+                    title: "Pacaran",
+                    text: `kami menyadari adanya kecocokan . Kami pun memutuskan untuk menjalin kasih dan memulai babak baru sebagai sepasang kekasih. Hari, bulan, bahkan tahun pun kami lalui bersama, saling mendukung, bertumbuh, dan menguji keyakinan satu sama lain.`,
                   },
                   {
-                    title: "Menjalin Kasih",
-                    text: `Dari first date yang seru, kami menyadari adanya kecocokan luar biasa. Kami pun mantap untuk menjalin kasih dan memulai babak baru sebagai sepasang kekasih. Hari, bulan, bahkan tahun pun kami lalui bersama, saling mendukung, bertumbuh, dan menguji keyakinan satu sama lain.`,
+                    title: "Lamaran",
+                    text: `Setelah melewati masa pacaran yang penuh makna, Kita memantapkan hati untuk membawa hubungan ini ke jenjang serius. Tepat pada tanggal 6 Juli 2025, momen lamaran yang mengharukan diselenggarakan, menjadi penanda bahwa hati kami telah bersepakat untuk saling melengkapi selamanya.`,
                   },
                   {
-                    title: "Memantapkan Hati (6 Juli 2025)",
-                    text: `Setelah melewati masa pacaran yang penuh makna, Adam memantapkan hati untuk membawa hubungan ini ke jenjang serius. Tepat pada tanggal 6 Juli 2025, momen lamaran yang mengharukan diselenggarakan, menjadi penanda bahwa hati kami telah bersepakat untuk saling melengkapi selamanya.`,
-                  },
-                  {
-                    title: "Janji Suci: Selamanya Milik Kita",
-                    text: `dengan penuh rasa syukur dan bahagia, kami siap mengukir babak baru. Kisah yang bermula dari DM Instagram, kelezatan Pisang Cebanan, dan keseruan date di Mall Jakarta, kini berlabuh di ikatan suci pernikahan.
-Mohon doa restu dari Bapak/Ibu/Saudara/i sekalian, agar pernikahan Adam & Tassya menjadi langkah awal menuju keluarga yang Sakinah, Mawaddah, Warahmah.
-Adam & Tassya`,
+                    title: "Pernikahan",
+                    text: `Dan Insha Allah di tanggal 6 Desember 2025 kami akan melaksanakan pernikahan. Dengan niat beribadah karena ALLAH, hidup bersama sehidup sesurga. Aamiin`,
                   },
                 ].map((story, i) => (
                   <motion.div
@@ -932,7 +954,7 @@ Adam & Tassya`,
                       },
                     }}
                   >
-                    <h3 className={`${lora.className} text-base font-serif italic mb-1`}>{story.title}</h3>
+                    <h3 className={`${lora.className} text-base font-serif italic mb-1 font-bold`}>{story.title}</h3>
                     <p className={`${lora.className} text-gray-100 whitespace-pre-line mb-10`}>{story.text}</p>
                   </motion.div>
                 ))}
